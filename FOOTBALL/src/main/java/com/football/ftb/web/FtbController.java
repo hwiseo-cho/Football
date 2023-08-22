@@ -39,8 +39,8 @@ public class FtbController {
 		LOGGER.debug("=========== todayMatches START ===========");
 		ModelAndView mv = new ModelAndView("jsonView");
 		
-		Map<String,Object> result = ftbService.todayMatches(inParam);
-		mv.addAllObjects(result);
+		//Map<String,Object> result = ftbService.todayMatches(inParam);
+		//mv.addAllObjects(result);
 		
 		LOGGER.debug("=========== todayMatches END ===========");
 		return mv;
