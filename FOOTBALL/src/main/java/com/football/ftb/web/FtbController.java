@@ -37,6 +37,7 @@ public class FtbController {
 	@RequestMapping("/todayMatches.do")
 	public ModelAndView todayMatches(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) {
 		LOGGER.debug("=========== todayMatches START ===========");
+		LOGGER.debug("=========== todayMatches param: {}", inParam);
 		ModelAndView mv = new ModelAndView("jsonView");
 		
 		//Map<String,Object> result = ftbService.todayMatches(inParam);

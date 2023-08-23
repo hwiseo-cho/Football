@@ -55,7 +55,7 @@ public class FtbServiceImpl implements FtbService {
 		String url = Football.FOOTBALL_API_URL;
 		
 		if("matches".equals(type)) {
-			url += String.valueOf(inParam.get("id")) + "/matches?matchday=1";
+			url += String.valueOf(inParam.get("leagueId")) + "/matches?matchday=1";
 		}
 		
 		LOGGER.debug("send url : {}", url);
