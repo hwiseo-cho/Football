@@ -9,6 +9,8 @@ public interface FtbService {
 
 	Map<String,Object> sendFootballApi(String type, Map<String,Object> inParam);
 
-	Map<String, Object> todayMatches(Map<String, Object> inParam);
+	int insertMatchesL(Map<String, Object> inParam);
+
+	Map<String, Object> selectMatches(Map<String, Object> inParam);
 
 }

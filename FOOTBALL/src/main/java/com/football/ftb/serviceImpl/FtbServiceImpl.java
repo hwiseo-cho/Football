@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.util.MapUtil;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,7 @@ import com.football.ftb.config.Configuration.Football;
 import com.football.ftb.dao.FtbDao;
 import com.football.ftb.service.FtbService;
 import com.football.ftb.web.FtbController;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 
 import ch.qos.logback.core.util.FileUtil;
 
@@ -91,17 +93,30 @@ public class FtbServiceImpl implements FtbService {
 	}
 
 	@Override
-	public Map<String, Object> todayMatches(Map<String, Object> inParam) {
-		// 결과값
-		Map<String, Object> resultMap = null;
+	public int insertMatchesL(Map<String, Object> inParam) {
+		return ftbDao.insertMatchesL(inParam);
+	}
+
+	@Override
+	public Map<String, Object> selectMatches(Map<String, Object> inParam) {
+		/* 해당 일정 DB조회 */
+		Map<String,Object> resultMap = ftbDao.selectMatchesList(inParam);
 		
-		/* 필드값 setting */
-		inParam.put("id", "2021");
-		
-		/* matches API 호출 */
-		resultMap = this.sendFootballApi("matches", inParam);
+		// DB에 없을경우 조회
+		if(resultMap == null) {
+			/* matches API 호출 */
+			resultMap = this.sendFootballApi("matches", inParam);
+			
+			/* 해당 결과 저장 */
+			Map<String,Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("LEAGUE_ID", inParam.get("leagueId"));
+    		paramMap.put("MATCH_DATE", inParam.get("today"));
+    		paramMap.put("MATCH_CN", resultMap.toString());
+			ftbDao.insertMatchesL(inParam);
+		}
 		
 		return resultMap;
+		
 	}
 
 }

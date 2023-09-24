@@ -34,14 +34,27 @@ public class FtbController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/todayMatches.do")
+	@RequestMapping("/matches/todayMatches.do")
 	public ModelAndView todayMatches(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) {
 		LOGGER.debug("=========== todayMatches START ===========");
 		LOGGER.debug("=========== todayMatches param: {}", inParam);
 		ModelAndView mv = new ModelAndView("jsonView");
 		
-		//Map<String,Object> result = ftbService.todayMatches(inParam);
-		//mv.addAllObjects(result);
+		Map<String,Object> result = ftbService.selectMatches(inParam);
+		
+		mv.addAllObjects(result);
+		
+		LOGGER.debug("=========== todayMatches END ===========");
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/matches/insertMatchesL.do")
+	public ModelAndView insertMatchesL(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) {
+		LOGGER.debug("=========== insertMatchesL START ===========");
+		ModelAndView mv = new ModelAndView("jsonView");
+		
+		ftbService.insertMatchesL(inParam);
 		
 		LOGGER.debug("=========== todayMatches END ===========");
 		return mv;
