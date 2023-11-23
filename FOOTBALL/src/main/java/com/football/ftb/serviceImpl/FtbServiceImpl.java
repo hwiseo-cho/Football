@@ -108,11 +108,12 @@ public class FtbServiceImpl implements FtbService {
 			resultMap = this.sendFootballApi("matches", inParam);
 			
 			/* 해당 결과 저장 */
-			Map<String,Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("LEAGUE_ID", inParam.get("leagueId"));
-    		paramMap.put("MATCH_DATE", inParam.get("today"));
-    		paramMap.put("MATCH_CN", resultMap.toString());
-			ftbDao.insertMatchesL(inParam);
+			/*
+			 * Map<String,Object> paramMap = new HashMap<String, Object>();
+			 * paramMap.put("LEAGUE_ID", inParam.get("leagueId"));
+			 * paramMap.put("MATCH_DATE", inParam.get("today")); paramMap.put("MATCH_CN",
+			 * resultMap.toString()); ftbDao.insertMatchesL(inParam);
+			 */
 		}
 		
 		return resultMap;
