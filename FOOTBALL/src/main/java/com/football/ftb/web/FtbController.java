@@ -30,7 +30,7 @@ public class FtbController {
 	public ModelAndView getIndex() throws JsonProcessingException {
 		LOGGER.debug("=========== Hello Football ===========");
 		ModelAndView mv = new ModelAndView("home");
-		return mv;
+		return mv; 
 	}
 	
 	@ResponseBody
