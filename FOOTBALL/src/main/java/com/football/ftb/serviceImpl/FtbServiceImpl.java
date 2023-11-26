@@ -34,6 +34,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.football.ftb.config.Configuration.Football;
+import com.football.ftb.constants.FootballConstants;
 import com.football.ftb.dao.FtbDao;
 import com.football.ftb.service.FtbService;
 import com.football.ftb.web.FtbController;
@@ -57,7 +58,8 @@ public class FtbServiceImpl implements FtbService {
 		String url = Football.FOOTBALL_API_URL;
 		
 		if("matches".equals(type)) {
-			url += String.valueOf(inParam.get("leagueId")) + "/matches?matchday=1";
+			String param = "dateFrom=" + String.valueOf(inParam.get("today")) + "&dateTo=" + String.valueOf(inParam.get("today"));
+			url += String.valueOf(inParam.get("leagueId")) + "/matches?" + param;
 		}
 		
 		LOGGER.debug("send url : {}", url);
@@ -104,16 +106,16 @@ public class FtbServiceImpl implements FtbService {
 		
 		// DB에 없을경우 조회
 		if(resultMap == null) {
+			
 			/* matches API 호출 */
-			resultMap = this.sendFootballApi("matches", inParam);
+			resultMap = this.sendFootballApi(FootballConstants.MATCHES, inParam);
 			
 			/* 해당 결과 저장 */
-			/*
-			 * Map<String,Object> paramMap = new HashMap<String, Object>();
-			 * paramMap.put("LEAGUE_ID", inParam.get("leagueId"));
-			 * paramMap.put("MATCH_DATE", inParam.get("today")); paramMap.put("MATCH_CN",
-			 * resultMap.toString()); ftbDao.insertMatchesL(inParam);
-			 */
+			Map<String,Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("LEAGUE_ID", inParam.get("leagueId"));
+			paramMap.put("MATCH_DATE", inParam.get("today")); paramMap.put("MATCH_CN",
+			resultMap.toString()); ftbDao.insertMatchesL(inParam);
+			 
 		}
 		
 		return resultMap;

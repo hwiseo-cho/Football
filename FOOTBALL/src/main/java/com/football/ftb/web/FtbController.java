@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.football.ftb.constants.FootballConstants;
 import com.football.ftb.service.FtbService;
 
 @Controller
@@ -26,6 +27,9 @@ public class FtbController {
 	@Autowired
 	private FtbService ftbService;
 	
+	/*
+	 *	home 화면으로 이동 
+	 */	
 	@RequestMapping("/home.do")
 	public ModelAndView getIndex() throws JsonProcessingException {
 		LOGGER.debug("=========== Hello Football ===========");
@@ -33,6 +37,12 @@ public class FtbController {
 		return mv; 
 	}
 	
+	/*
+	 *	경기 일정 가져오기 
+	 *	1. 해당 날짜 DB 조회 
+	 *	2. 존재하면 가져와서 보여줌 
+	 *	3. 없으면 API 통신 및 DB 저 
+	 */	
 	@ResponseBody
 	@RequestMapping("/matches/todayMatches.do")
 	public ModelAndView todayMatches(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) {
@@ -43,18 +53,6 @@ public class FtbController {
 		Map<String,Object> result = ftbService.selectMatches(inParam);
 		
 		mv.addAllObjects(result);
-		
-		LOGGER.debug("=========== todayMatches END ===========");
-		return mv;
-	}
-	
-	@ResponseBody
-	@RequestMapping("/matches/insertMatchesL.do")
-	public ModelAndView insertMatchesL(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) {
-		LOGGER.debug("=========== insertMatchesL START ===========");
-		ModelAndView mv = new ModelAndView("jsonView");
-		
-		ftbService.insertMatchesL(inParam);
 		
 		LOGGER.debug("=========== todayMatches END ===========");
 		return mv;
