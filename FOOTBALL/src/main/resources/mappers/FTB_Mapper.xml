@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.football.ftb.dao.FtbDao">
-    <select id="selectMatchesList" resultType="hashmap">
+    <select id="selectMatchesList" parameterType="map" resultType="map">
     	SELECT
-    		*
+    		MATCH_ID,
+    		LEAGUE_ID,
+    		MATCH_DATE,
+    		MATCH_CN 
     	FROM 
     		TB_MATCHES_L
+    	WHERE
+    		MATCH_DATE = #{today}
     </select>
     
-    <insert id="insertMatchesL">
+    <insert id="insertMatchesL" parameterType="map">
     	INSERT INTO TB_MATCHES_L 
     	(
    			MATCH_ID,
@@ -17,7 +22,7 @@
 			MATCH_CN,
 			regist_date
    		)
-   		VALUESE
+   		VALUES
     	(
     		default,
     		#{LEAGUE_ID},

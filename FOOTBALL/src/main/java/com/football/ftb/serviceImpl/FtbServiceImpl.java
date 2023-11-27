@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.MapUtils;
 import org.apache.ibatis.util.MapUtil;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
@@ -31,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.football.ftb.config.Configuration.Football;
@@ -99,13 +101,14 @@ public class FtbServiceImpl implements FtbService {
 		return ftbDao.insertMatchesL(inParam);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, Object> selectMatches(Map<String, Object> inParam) {
+	public Map<String, Object> selectMatches(Map<String, Object> inParam) throws Exception {
 		/* 해당 일정 DB조회 */
 		Map<String,Object> resultMap = ftbDao.selectMatchesList(inParam);
 		
 		// DB에 없을경우 조회
-		if(resultMap == null) {
+		if(MapUtils.isEmpty(resultMap)) {
 			
 			/* matches API 호출 */
 			resultMap = this.sendFootballApi(FootballConstants.MATCHES, inParam);
@@ -113,9 +116,15 @@ public class FtbServiceImpl implements FtbService {
 			/* 해당 결과 저장 */
 			Map<String,Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("LEAGUE_ID", inParam.get("leagueId"));
-			paramMap.put("MATCH_DATE", inParam.get("today")); paramMap.put("MATCH_CN",
-			resultMap.toString()); ftbDao.insertMatchesL(inParam);
+			paramMap.put("MATCH_DATE", inParam.get("today")); 
+			paramMap.put("MATCH_CN", new ObjectMapper().writeValueAsString(resultMap)); 
+			ftbDao.insertMatchesL(paramMap);
 			 
+		} 
+		// 존재하면 가져와서 보여
+		else {
+			String matchCn = String.valueOf(resultMap.get("MATCH_CN"));
+			resultMap = new ObjectMapper().readValue(matchCn, Map.class);
 		}
 		
 		return resultMap;

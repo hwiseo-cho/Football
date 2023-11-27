@@ -41,11 +41,11 @@ public class FtbController {
 	 *	경기 일정 가져오기 
 	 *	1. 해당 날짜 DB 조회 
 	 *	2. 존재하면 가져와서 보여줌 
-	 *	3. 없으면 API 통신 및 DB 저 
+	 *	3. 없으면 API 통신 및 DB 저장 
 	 */	
 	@ResponseBody
 	@RequestMapping("/matches/todayMatches.do")
-	public ModelAndView todayMatches(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) {
+	public ModelAndView todayMatches(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) throws Exception {
 		LOGGER.debug("=========== todayMatches START ===========");
 		LOGGER.debug("=========== todayMatches param: {}", inParam);
 		ModelAndView mv = new ModelAndView("jsonView");
