@@ -15,4 +15,6 @@ public interface FtbService {
 
 	Map<String, Object> selectMatches(Map<String, Object> inParam) throws Exception;
 
+	void deleteFootballData();
+
 }

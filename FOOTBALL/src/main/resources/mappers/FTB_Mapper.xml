@@ -11,6 +11,7 @@
     		TB_MATCHES_L
     	WHERE
     		MATCH_DATE = #{today}
+    		AND LEAGUE_ID = #{leagueId}
     </select>
     
     <insert id="insertMatchesL" parameterType="map">
@@ -31,4 +32,8 @@
     		default
     	)
     </insert>
+    
+    <delete id="deleteFootballData">
+    	DELETE FROM TB_MATCHES_L
+    </delete>
 </mapper>

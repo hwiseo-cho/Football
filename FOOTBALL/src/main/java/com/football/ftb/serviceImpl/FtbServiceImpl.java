@@ -59,7 +59,7 @@ public class FtbServiceImpl implements FtbService {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String url = Football.FOOTBALL_API_URL;
 		
-		if("matches".equals(type)) {
+		if(FootballConstants.MATCHES.equals(type)) {
 			String param = "dateFrom=" + String.valueOf(inParam.get("today")) + "&dateTo=" + String.valueOf(inParam.get("today"));
 			url += String.valueOf(inParam.get("leagueId")) + "/matches?" + param;
 		}
@@ -114,6 +114,8 @@ public class FtbServiceImpl implements FtbService {
 			resultMap = this.sendFootballApi(FootballConstants.MATCHES, inParam);
 			
 			/* 해당 결과 저장 */
+			// Football-data.org에서 free티어는 분당 12회 호출이 가능해서 이를 최소하기위해 저장해둠
+			// 스케줄러를 통해 해당 데이터 관리 
 			Map<String,Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("LEAGUE_ID", inParam.get("leagueId"));
 			paramMap.put("MATCH_DATE", inParam.get("today")); 
@@ -129,6 +131,11 @@ public class FtbServiceImpl implements FtbService {
 		
 		return resultMap;
 		
+	}
+
+	@Override
+	public void deleteFootballData() {
+		ftbDao.deleteFootballData();
 	}
 
 }
