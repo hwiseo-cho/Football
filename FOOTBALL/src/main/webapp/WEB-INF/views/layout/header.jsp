@@ -10,7 +10,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>SCORE</title>
-    <link rel="icon" type="${contextPath}/resources/images/main_soccer_icon.png" href="${contextPath}/resources/images/main_soccer_icon.png" />
+    <link rel="icon" type="${contextPath}/resources/images/soccer_ball_icon.png" href="${contextPath}/resources/images/soccer_ball_icon.png" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -36,7 +36,7 @@
 	<!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
          <div class="container px-lg-5">
-             <a class="navbar-brand" href="#!"><img src="${contextPath}/resources/images/main_soccer_icon.png" style="width: 30px; margin-top: -4px; margin-right: 10px;"/>SCORE</a>
+             <a class="navbar-brand" href="#!"><img src="${contextPath}/resources/images/soccer_ball_icon.png" style="width: 30px; margin-top: -4px; margin-right: 10px;"/>SCORE</a>
              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
              <div class="collapse navbar-collapse" id="navbarSupportedContent">
                  <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

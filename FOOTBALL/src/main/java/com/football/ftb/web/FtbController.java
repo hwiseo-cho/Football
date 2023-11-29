@@ -1,6 +1,5 @@
 package com.football.ftb.web;
 
-import java.util.List; 
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.football.ftb.constants.FootballConstants;
 import com.football.ftb.service.FtbService;
-
+/**
+ *	첫 화면 및 API관련 컨트롤러
+ *	
+ *	@author hwiseo
+ *	@version 1.0
+ *	@since 2023-11-28
+ */
 @Controller
 public class FtbController {
 	
@@ -27,7 +31,7 @@ public class FtbController {
 	@Autowired
 	private FtbService ftbService;
 	
-	/*
+	/**
 	 *	home 화면으로 이동 
 	 */	
 	@RequestMapping("/home.do")
@@ -37,17 +41,17 @@ public class FtbController {
 		return mv; 
 	}
 	
-	/*
+	/**
 	 *	경기 일정 가져오기 
-	 *	1. 해당 날짜 DB 조회 
-	 *	2. 존재하면 가져와서 보여줌 
-	 *	3. 없으면 API 통신 및 DB 저장 
+	 *
+	 *	@param today(날짜)
+	 *  @param leageId(리그 키값)
+	 *	@return 해당하는 경기 일정
 	 */	
 	@ResponseBody
 	@RequestMapping("/matches/todayMatches.do")
 	public ModelAndView todayMatches(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) throws Exception {
 		LOGGER.debug("=========== todayMatches START ===========");
-		LOGGER.debug("=========== todayMatches param: {}", inParam);
 		ModelAndView mv = new ModelAndView("jsonView");
 		
 		Map<String,Object> result = ftbService.selectMatches(inParam);

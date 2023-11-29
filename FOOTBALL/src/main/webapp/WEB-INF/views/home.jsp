@@ -115,7 +115,7 @@ function searchMatches() {
 					else {
 						htmlStr += '			<span class="score_team_vs">'+startTime;
 						htmlStr += '				<br>';
-						htmlStr += '				<span style="font-size:14px;">Scheduled</span>';
+						htmlStr += '				<span style="font-size:13px;">Scheduled</span>';
 						htmlStr += '			</span>';
 					}
 					htmlStr += '			<span class="fs-8 fw-bold score_team_icon"><img src="'+matches[i].awayTeam.crest+'" style="width:60px;"/><br>'+matches[i].awayTeam.name+'</span>';
