@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,16 @@ public class FtbController {
 	@RequestMapping("/home.do")
 	public ModelAndView getIndex(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) throws JsonProcessingException {
 		LOGGER.debug("=========== Hello Football ===========");
-		ModelAndView mv = new ModelAndView("home");
-		return mv; 
+		ModelAndView mav = new ModelAndView("home");
+		
+		// 리그 키값 없으면 PL 디폴트
+		if(inParam.containsKey("leagueId")) {
+			mav.addObject("leagueId", inParam.get("leagueId"));
+		} else {
+			mav.addObject("leagueId", "2021");
+		}
+		
+		return mav;
 	}
 	
 	/**

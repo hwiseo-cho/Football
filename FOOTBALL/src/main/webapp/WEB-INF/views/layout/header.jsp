@@ -34,18 +34,24 @@
 
 <script type="text/javascript">
 	$(function() {
+		$('.navbar-brand, #scores').on('click', function() {
+			movePage('${contextPath}/home.do');
+		});
+		
+		$('.leagueId').on('click', function() {
+			$('#leagueId').val($(this).attr('data-id'));
+			var form = $('#form1');
+			form.action = '${contextPath}/home.do';
+			form.submit();
+		});
+		
 		$('.dropdown').on('click', function() {
 			
 			switch ($(this).attr('data-menu')) {
 			
-			case 'scores': movePage('${contextPath}/home.do')
-				break;
 			case 'tables': movePage('${contextPath}/ftb/moveTablesPage.do');
 				break;
 			case 'teams':
-				break;
-
-			default:
 				break;
 			}
 			
@@ -61,7 +67,7 @@ function movePage(url) {
 	<!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
          <div class="container px-lg-5">
-             <a class="navbar-brand" href="#!"><img src="${contextPath}/resources/images/soccer_ball_icon.png" style="width: 30px; margin-top: -4px; margin-right: 10px;"/>FOOTBALL</a>
+             <a class="navbar-brand"><img src="${contextPath}/resources/images/soccer_ball_icon.png" style="width: 30px; margin-top: -4px; margin-right: 10px;"/>FOOTBALL</a>
              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
              <div class="collapse navbar-collapse" id="navbarSupportedContent">
                  <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -79,7 +85,7 @@ function movePage(url) {
 		
 		<div class="text-white" style="height:50px;">
 			<div class="float-start text-center dropdown" data-menu="scores">
-				<span>Scores</span>
+				<span id="scores"S>Scores</span>
 				<div class="dropdown-content">
 				    <span class="leagueId" data-id="2021">Premier League</span>
 				    <span class="leagueId" data-id="2014">La Liga</span>
@@ -97,3 +103,6 @@ function movePage(url) {
 		</div>
 	</div>
 </header>
+<form id="form1" method="post">
+	<input type="hidden" id="leagueId" name="leagueId"/>
+</form>

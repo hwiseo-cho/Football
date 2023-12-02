@@ -9,15 +9,6 @@
 		// 초기화
 		init();
 		
-		/* 검색 리그 선택 이벤트 */
-		$('.leagueId').on('click',function() {
-			var leagueId = $(this).attr('data-id');
-			$('#leagueId').val(leagueId);
-			
-			// 재검색
-			searchMatches();
-		});
-		
 		/* 날짜 선택 이벤트 */
 		$('.date-num').on('click',function() {
 			$('#today').val($(this).attr('data-dt'));
@@ -54,7 +45,7 @@ function init() {
 	// 날짜 세팅
 	$('#today').val(toDateStringFormat(new Date()));
 	// PL 세팅
-	$('#leagueId').val('2021');
+	$('#leagueId').val('${leagueId}');
 
 	
 	setDateList();
@@ -163,7 +154,6 @@ function toDateFormat(str) {
 }
 </script>
 <body>
-	<input type="hidden" id="leagueId" name="leagueId" value="" />
 	<input type="hidden" id="today" name="today" value="" />
 	
     <section class="bg-white" style="text-align:center;">
