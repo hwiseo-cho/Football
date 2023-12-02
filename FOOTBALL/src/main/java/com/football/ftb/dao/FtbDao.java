@@ -14,4 +14,6 @@ public interface FtbDao {
 
 	void deleteFootballData();
 
+	Map<String, Object> selectleagueStandings(Map<String, Object> inParam);
+
 }

@@ -35,7 +35,7 @@ public class FtbController {
 	 *	home 화면으로 이동 
 	 */	
 	@RequestMapping("/home.do")
-	public ModelAndView getIndex() throws JsonProcessingException {
+	public ModelAndView getIndex(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) throws JsonProcessingException {
 		LOGGER.debug("=========== Hello Football ===========");
 		ModelAndView mv = new ModelAndView("home");
 		return mv; 
@@ -49,7 +49,7 @@ public class FtbController {
 	 *	@return 해당하는 경기 일정
 	 */	
 	@ResponseBody
-	@RequestMapping("/matches/todayMatches.do")
+	@RequestMapping("/ftb/todayMatches.do")
 	public ModelAndView todayMatches(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) throws Exception {
 		LOGGER.debug("=========== todayMatches START ===========");
 		ModelAndView mv = new ModelAndView("jsonView");
@@ -59,6 +59,39 @@ public class FtbController {
 		mv.addAllObjects(result);
 		
 		LOGGER.debug("=========== todayMatches END ===========");
+		return mv;
+	}
+	
+	/**
+	 *	리그 순위 페이지 이동
+	 *
+	 *	@return 리그 순위 페이지
+	 */
+	@RequestMapping("/ftb/moveTablesPage.do")
+	public ModelAndView moveTablesPage(HttpServletRequest request, HttpServletResponse response) {
+		LOGGER.debug("=========== moveTablesPage START ===========");
+		ModelAndView mav = new ModelAndView("tbl/tables");
+		LOGGER.debug("=========== moveTablesPage END ===========");
+		return mav;
+	}
+	
+	/**
+	 *	리그 순위 가져오기
+	 *
+	 *  @param leageId(리그 키값)
+	 *	@return 해당하는 리그 순
+	 */	
+	@ResponseBody
+	@RequestMapping("/ftb/leagueStandings.do")
+	public ModelAndView leagueStandings(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) throws Exception {
+		LOGGER.debug("=========== leagueStandings START ===========");
+		ModelAndView mv = new ModelAndView("jsonView");
+		
+		Map<String,Object> result = ftbService.leagueStandings(inParam);
+		
+		mv.addAllObjects(result);
+		
+		LOGGER.debug("=========== leagueStandings END ===========");
 		return mv;
 	}
 	

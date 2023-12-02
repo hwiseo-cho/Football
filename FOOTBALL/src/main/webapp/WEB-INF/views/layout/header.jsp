@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>SCORE</title>
+    <title>FOOTBALL</title>
     <link rel="icon" type="${contextPath}/resources/images/soccer_ball_icon.png" href="${contextPath}/resources/images/soccer_ball_icon.png" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -20,7 +20,7 @@
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="js/scripts.js"></script>
+<script src="${contextPath}/resources/js/scripts.js"></script>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <!-- * *                               SB Forms JS                               * *-->
 <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
@@ -30,13 +30,38 @@
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="js/scripts.js"></script>
 </head>
+
+<script type="text/javascript">
+	$(function() {
+		$('.dropdown').on('click', function() {
+			
+			switch ($(this).attr('data-menu')) {
+			
+			case 'scores': movePage('${contextPath}/home.do')
+				break;
+			case 'tables': movePage('${contextPath}/ftb/moveTablesPage.do');
+				break;
+			case 'teams':
+				break;
+
+			default:
+				break;
+			}
+			
+		});
+	});
+	
+function movePage(url) {
+	location.href = url;
+}
+</script>
+
 <header>
 	<!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
          <div class="container px-lg-5">
-             <a class="navbar-brand" href="#!"><img src="${contextPath}/resources/images/soccer_ball_icon.png" style="width: 30px; margin-top: -4px; margin-right: 10px;"/>SCORE</a>
+             <a class="navbar-brand" href="#!"><img src="${contextPath}/resources/images/soccer_ball_icon.png" style="width: 30px; margin-top: -4px; margin-right: 10px;"/>FOOTBALL</a>
              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
              <div class="collapse navbar-collapse" id="navbarSupportedContent">
                  <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -47,4 +72,28 @@
              </div>
          </div>
      </nav>
+</header>
+
+<header class="py-4 bg-dark" style="padding-bottom:0 !important;">
+	<div class="container px-lg-5">
+		
+		<div class="text-white" style="height:50px;">
+			<div class="float-start text-center dropdown" data-menu="scores">
+				<span>Scores</span>
+				<div class="dropdown-content">
+				    <span class="leagueId" data-id="2021">Premier League</span>
+				    <span class="leagueId" data-id="2014">La Liga</span>
+				    <span class="leagueId" data-id="2002">Bundesliga</span>
+				    <span class="leagueId" data-id="2019">Serie A</span>
+				</div>
+			</div>
+			<div class="float-start text-center dropdown" data-menu="tables">
+				<span>Tables</span>
+			</div>
+			<div class="float-start text-center dropdown" data-menu="teams">
+				<span>Teams</span>				
+			</div>
+			<!-- https://crests.football-data.org/ PL PD BL1 SA -->
+		</div>
+	</div>
 </header>

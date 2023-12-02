@@ -2,6 +2,8 @@ package com.football.ftb.service;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 
 
 public interface FtbService {
@@ -36,5 +38,16 @@ public interface FtbService {
 	 * 경기일정 데이터 삭제 배치
 	 */
 	void deleteFootballData();
+
+	/**
+	 * 리그 순위 가져오기
+	 * 1. 해당 날짜 DB 조회 
+	 * 2. 존재하면 가져와서 보여줌 
+	 * 3. 없으면 API 통신 및 DB 저장 
+	 * @param leageId(리그 키값)
+	 * @return 해당하는 리그 순위
+	 * @throws JsonProcessingException 
+	 */	
+	Map<String, Object> leagueStandings(Map<String, Object> inParam) throws JsonProcessingException;
 
 }
