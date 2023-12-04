@@ -34,28 +34,24 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('.navbar-brand, #scores').on('click', function() {
+		$('.leagueId').on('click', function(e) {
+			e.stopPropagation();
+			movePage('${contextPath}/home.do?leagueId='+$(this).attr('data-id'));
+		});
+		
+		$('#scoresMenu').on('click', function() {
 			movePage('${contextPath}/home.do');
 		});
 		
-		$('.leagueId').on('click', function() {
-			$('#leagueId').val($(this).attr('data-id'));
-			var form = $('#form1');
-			form.action = '${contextPath}/home.do';
-			form.submit();
+		$('#tablesMenu').on('click', function() {
+			movePage('${contextPath}/ftb/moveTablesPage.do');
 		});
 		
-		$('.dropdown').on('click', function() {
-			
-			switch ($(this).attr('data-menu')) {
-			
-			case 'tables': movePage('${contextPath}/ftb/moveTablesPage.do');
-				break;
-			case 'teams':
-				break;
-			}
+		$('#teamsMenu').on('click', function() {
 			
 		});
+		
+		
 	});
 
 /* 페이지 이동 */
@@ -108,8 +104,8 @@ function toDateFormat(str) {
 	<div class="container px-lg-5">
 		
 		<div class="text-white" style="height:50px;">
-			<div class="float-start text-center dropdown" data-menu="scores">
-				<span id="scores"S>Scores</span>
+			<div id="scoresMenu" class="float-start text-center dropdown" data-menu="scores">
+				<span>Scores</span>
 				<div class="dropdown-content">
 				    <span class="leagueId" data-id="2021">Premier League</span>
 				    <span class="leagueId" data-id="2014">La Liga</span>
@@ -117,10 +113,10 @@ function toDateFormat(str) {
 				    <span class="leagueId" data-id="2019">Serie A</span>
 				</div>
 			</div>
-			<div class="float-start text-center dropdown" data-menu="tables">
+			<div id="tablesMenu" class="float-start text-center dropdown" data-menu="tables">
 				<span>Tables</span>
 			</div>
-			<div class="float-start text-center dropdown" data-menu="teams">
+			<div id="temasMenu" class="float-start text-center dropdown" data-menu="teams">
 				<span>Teams</span>				
 			</div>
 			<!-- https://crests.football-data.org/ PL PD BL1 SA -->
