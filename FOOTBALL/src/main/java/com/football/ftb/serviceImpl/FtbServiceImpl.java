@@ -68,6 +68,10 @@ public class FtbServiceImpl implements FtbService {
 		else if(FootballConstants.STANDINGS.equals(type)) {
 			url += String.valueOf(inParam.get("leagueId")) + "/standings";
 		}
+		// SCORERS
+		else if(FootballConstants.SCORERS.equals(type)) {
+			url += String.valueOf(inParam.get("leagueId")) + "/scorers?limit=20";
+		}
 		
 		LOGGER.debug("send url : {}", url);
 		
@@ -155,6 +159,35 @@ public class FtbServiceImpl implements FtbService {
 			
 			/* standings API 호출 */
 			resultMap = this.sendFootballApi(FootballConstants.STANDINGS, inParam);
+			
+			/* 해당 결과 저장 */
+			//Map<String,Object> paramMap = new HashMap<String, Object>();
+			//paramMap.put("LEAGUE_ID", inParam.get("leagueId"));
+			//paramMap.put("MATCH_DATE", inParam.get("today")); 
+			//paramMap.put("MATCH_CN", new ObjectMapper().writeValueAsString(resultMap)); 
+			//ftbDao.insertMatchesL(paramMap);
+			 
+		} 
+		// 존재하면 가져와서 보여
+		else {
+			//String matchCn = String.valueOf(resultMap.get("MATCH_CN"));
+			//resultMap = new ObjectMapper().readValue(matchCn, Map.class);
+		}
+		
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> getTopScorers(Map<String, Object> inParam) {
+		/* 해당 일정 DB조회 */
+		Map<String,Object> resultMap = null;
+		//Map<String,Object> resultMap = ftbDao.selectleagueStandings(inParam);
+		
+		// DB에 없을경우 조회
+		if(MapUtils.isEmpty(resultMap)) {
+			
+			/* standings API 호출 */
+			resultMap = this.sendFootballApi(FootballConstants.SCORERS, inParam);
 			
 			/* 해당 결과 저장 */
 			//Map<String,Object> paramMap = new HashMap<String, Object>();

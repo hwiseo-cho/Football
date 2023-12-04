@@ -57,9 +57,33 @@
 			
 		});
 	});
-	
+
+/* 페이지 이동 */
 function movePage(url) {
 	location.href = url;
+}
+
+/* NVL */
+function nvl(expr1, expr2) {
+	if (expr1 === undefined || expr1 == null || expr1 == "") {
+		expr1 = expr2;
+	}
+	return expr1;
+}
+
+/* Date를 yyyyMMdd */
+function toDateStringFormat(date) {
+	var year = date.getFullYear();
+	var temp = date.getMonth()+1;
+    var month = (temp < 10) ? '0' + temp : temp;
+    var day = (date.getDate() < 10) ? '0' + date.getDate() : date.getDate();
+
+    return year + '-' + month + '-' + day;
+}
+
+/* yyyyMMdd를 Date */
+function toDateFormat(str) {
+    return new Date(str);
 }
 </script>
 

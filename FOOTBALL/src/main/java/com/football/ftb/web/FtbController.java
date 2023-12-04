@@ -88,7 +88,7 @@ public class FtbController {
 	 *	리그 순위 가져오기
 	 *
 	 *  @param leageId(리그 키값)
-	 *	@return 해당하는 리그 순
+	 *	@return 해당하는 리그 순위
 	 */	
 	@ResponseBody
 	@RequestMapping("/ftb/leagueStandings.do")
@@ -101,6 +101,26 @@ public class FtbController {
 		mv.addAllObjects(result);
 		
 		LOGGER.debug("=========== leagueStandings END ===========");
+		return mv;
+	}
+	
+	/**
+	 *	개인 득점 순위 가져오기
+	 *
+	 *  @param leageId(리그 키값)
+	 *	@return 해당하는 리그 개인 득점 순위
+	 */	
+	@ResponseBody
+	@RequestMapping("/ftb/getTopScorers.do")
+	public ModelAndView getTopScorers(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object> inParam) throws Exception {
+		LOGGER.debug("=========== getTopScorers START ===========");
+		ModelAndView mv = new ModelAndView("jsonView");
+		
+		Map<String,Object> result = ftbService.getTopScorers(inParam);
+		
+		mv.addAllObjects(result);
+		
+		LOGGER.debug("=========== getTopScorers END ===========");
 		return mv;
 	}
 	

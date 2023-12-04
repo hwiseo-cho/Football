@@ -50,4 +50,15 @@ public interface FtbService {
 	 */	
 	Map<String, Object> leagueStandings(Map<String, Object> inParam) throws JsonProcessingException;
 
+	/**
+	 * 개인 득점 순위 가져오기
+	 * 1. 해당 날짜 DB 조회 
+	 * 2. 존재하면 가져와서 보여줌 
+	 * 3. 없으면 API 통신 및 DB 저장 
+	 * @param leageId(리그 키값)
+	 * @return 해당하는 리그 개인 득점 순위
+	 * @throws JsonProcessingException 
+	 */	
+	Map<String, Object> getTopScorers(Map<String, Object> inParam);
+
 }

@@ -138,20 +138,7 @@ function setDateList() {
 	}
 }
 
-/* Date를 yyyyMMdd */
-function toDateStringFormat(date) {
-	var year = date.getFullYear();
-	var temp = date.getMonth()+1;
-    var month = (temp < 10) ? '0' + temp : temp;
-    var day = (date.getDate() < 10) ? '0' + date.getDate() : date.getDate();
 
-    return year + '-' + month + '-' + day;
-}
-
-/* yyyyMMdd를 Date */
-function toDateFormat(str) {
-    return new Date(str);
-}
 </script>
 <body>
 	<input type="hidden" id="today" name="today" value="" />

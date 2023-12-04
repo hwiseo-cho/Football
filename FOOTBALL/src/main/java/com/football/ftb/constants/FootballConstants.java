@@ -13,5 +13,5 @@ public class FootballConstants {
 	
 	public static String TEAMS = "teams";
 	
-	public static String SCORES = "scores";
+	public static String SCORERS = "scorers";
 }
