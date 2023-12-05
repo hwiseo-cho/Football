@@ -59,6 +59,11 @@ public interface FtbService {
 	 * @return 해당하는 리그 개인 득점 순위
 	 * @throws JsonProcessingException 
 	 */	
-	Map<String, Object> getTopScorers(Map<String, Object> inParam);
+	Map<String, Object> getTopScorers(Map<String, Object> inParam) throws JsonProcessingException;
+
+	/**
+	 * 순위 데이터 삭제 배치
+	 */
+	void deleteStandingsData();
 
 }

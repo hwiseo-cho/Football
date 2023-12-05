@@ -30,7 +30,7 @@ public class FtbScheduler {
 	private FtbService ftbService;
 	
 	/*
-	 *	매 1분마다 검색 데이터 삭제 스케줄러
+	 *	매 1분 마다 경기 일정 검색 데이터 삭제 스케줄러
 	 * */
 	@Scheduled(cron="0 0/1 * * * *")
 	public void deleteFootballData() {
@@ -44,6 +44,23 @@ public class FtbScheduler {
 		
 		
 		LOGGER.info("########### deleteFootballData END ###########");
+	}
+	
+	/*
+	 *	매 1시간 마다 순위 데이터 삭제 스케줄러
+	 * */
+	@Scheduled(cron="0 0 0/1 * * *")
+	public void deleteStandingsData() {
+		LOGGER.info("########### deleteStandingsData START ###########");
+		
+		try {
+			ftbService.deleteStandingsData();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		LOGGER.info("########### deleteStandingsData END ###########");
 	}
 	
 	

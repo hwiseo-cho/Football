@@ -151,8 +151,7 @@ public class FtbServiceImpl implements FtbService {
 	@Override
 	public Map<String, Object> leagueStandings(Map<String, Object> inParam) throws JsonProcessingException {
 		/* 해당 일정 DB조회 */
-		Map<String,Object> resultMap = null;
-		//Map<String,Object> resultMap = ftbDao.selectleagueStandings(inParam);
+		Map<String,Object> resultMap = ftbDao.selectStandingsList(inParam);
 		
 		// DB에 없을경우 조회
 		if(MapUtils.isEmpty(resultMap)) {
@@ -161,27 +160,26 @@ public class FtbServiceImpl implements FtbService {
 			resultMap = this.sendFootballApi(FootballConstants.STANDINGS, inParam);
 			
 			/* 해당 결과 저장 */
-			//Map<String,Object> paramMap = new HashMap<String, Object>();
-			//paramMap.put("LEAGUE_ID", inParam.get("leagueId"));
-			//paramMap.put("MATCH_DATE", inParam.get("today")); 
-			//paramMap.put("MATCH_CN", new ObjectMapper().writeValueAsString(resultMap)); 
-			//ftbDao.insertMatchesL(paramMap);
+			Map<String,Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("leagueId", inParam.get("leagueId"));
+			paramMap.put("standingType", FootballConstants.STANDINGS); 
+			paramMap.put("standingsCn", new ObjectMapper().writeValueAsString(resultMap)); 
+			ftbDao.insertStandingsL(paramMap);
 			 
 		} 
 		// 존재하면 가져와서 보여
 		else {
-			//String matchCn = String.valueOf(resultMap.get("MATCH_CN"));
-			//resultMap = new ObjectMapper().readValue(matchCn, Map.class);
+			String matchCn = String.valueOf(resultMap.get("STANDINGS_CN"));
+			resultMap = new ObjectMapper().readValue(matchCn, Map.class);
 		}
 		
 		return resultMap;
 	}
 
 	@Override
-	public Map<String, Object> getTopScorers(Map<String, Object> inParam) {
+	public Map<String, Object> getTopScorers(Map<String, Object> inParam) throws JsonProcessingException {
 		/* 해당 일정 DB조회 */
-		Map<String,Object> resultMap = null;
-		//Map<String,Object> resultMap = ftbDao.selectleagueStandings(inParam);
+		Map<String,Object> resultMap = ftbDao.selectStandingsList(inParam);
 		
 		// DB에 없을경우 조회
 		if(MapUtils.isEmpty(resultMap)) {
@@ -190,20 +188,25 @@ public class FtbServiceImpl implements FtbService {
 			resultMap = this.sendFootballApi(FootballConstants.SCORERS, inParam);
 			
 			/* 해당 결과 저장 */
-			//Map<String,Object> paramMap = new HashMap<String, Object>();
-			//paramMap.put("LEAGUE_ID", inParam.get("leagueId"));
-			//paramMap.put("MATCH_DATE", inParam.get("today")); 
-			//paramMap.put("MATCH_CN", new ObjectMapper().writeValueAsString(resultMap)); 
-			//ftbDao.insertMatchesL(paramMap);
+			Map<String,Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("leagueId", inParam.get("leagueId"));
+			paramMap.put("standingType", FootballConstants.SCORERS); 
+			paramMap.put("standingsCn", new ObjectMapper().writeValueAsString(resultMap)); 
+			ftbDao.insertStandingsL(paramMap);
 			 
 		} 
 		// 존재하면 가져와서 보여
 		else {
-			//String matchCn = String.valueOf(resultMap.get("MATCH_CN"));
-			//resultMap = new ObjectMapper().readValue(matchCn, Map.class);
+			String matchCn = String.valueOf(resultMap.get("STANDINGS_CN"));
+			resultMap = new ObjectMapper().readValue(matchCn, Map.class);
 		}
 		
 		return resultMap;
+	}
+
+	@Override
+	public void deleteStandingsData() {
+		ftbDao.deleteStandingsData();
 	}
 
 }

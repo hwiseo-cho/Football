@@ -16,4 +16,10 @@ public interface FtbDao {
 
 	Map<String, Object> selectleagueStandings(Map<String, Object> inParam);
 
+	Map<String, Object> selectStandingsList(Map<String, Object> inParam);
+
+	int insertStandingsL(Map<String, Object> paramMap);
+
+	void deleteStandingsData();
+
 }

@@ -33,7 +33,43 @@
     	)
     </insert>
     
+    <select id="selectStandingsList" parameterType="map" resultType="map">
+    	SELECT
+    		STANDINGS_ID,
+    		LEAGUE_ID,
+    		STADING_TYPE,
+    		STANDINGS_CN 
+    	FROM 
+    		TB_STANDINGS_L
+    	WHERE
+    		STADING_TYPE = #{standingType}
+    		AND LEAGUE_ID = #{leagueId}
+    </select>
+    
+    <insert id="insertStandingsL" parameterType="map">
+    	INSERT INTO TB_STANDINGS_L 
+    	(
+   			STANDINGS_ID,
+			LEAGUE_ID,
+			STADING_TYPE,
+			STANDINGS_CN,
+			RAGIST_DATE
+   		)
+   		VALUES
+    	(
+    		default,
+    		#{leagueId},
+    		#{standingType},
+    		#{standingsCn},
+    		default
+    	)
+    </insert>
+    
     <delete id="deleteFootballData">
     	DELETE FROM TB_MATCHES_L
     </delete>
+    
+    <insert id="deleteStandingsData">
+    	DELETE FROM TB_STANDINGS_L
+    </insert>
 </mapper>

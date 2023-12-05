@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.football.ftb.constants.FootballConstants;
 import com.football.ftb.service.FtbService;
 /**
  *	첫 화면 및 API관련 컨트롤러
@@ -96,6 +97,7 @@ public class FtbController {
 		LOGGER.debug("=========== leagueStandings START ===========");
 		ModelAndView mv = new ModelAndView("jsonView");
 		
+		inParam.put("standingType", FootballConstants.STANDINGS);
 		Map<String,Object> result = ftbService.leagueStandings(inParam);
 		
 		mv.addAllObjects(result);
@@ -116,6 +118,7 @@ public class FtbController {
 		LOGGER.debug("=========== getTopScorers START ===========");
 		ModelAndView mv = new ModelAndView("jsonView");
 		
+		inParam.put("standingType", FootballConstants.SCORERS);
 		Map<String,Object> result = ftbService.getTopScorers(inParam);
 		
 		mv.addAllObjects(result);
