@@ -51,8 +51,12 @@
 
 <img width="1710" alt="standing1" src="https://github.com/hwiseo-cho/Football/assets/57250330/f0f5204f-6a5c-45cf-befd-fa12c29885bc">
 <img width="1710" alt="standing2" src="https://github.com/hwiseo-cho/Football/assets/57250330/06d9a5ed-dbb4-4f8d-8336-270cc2519d18">
+<br><br>
 
 #### :pushpin: API 조회 결과 데이터 관리 배치
 
 1. Football-data.org Free 버전은 1분당 총 12회까지 호출할 수 있어 이를 최소화 하기위해 값을 DB에 저장하고 경기 일정은 1분, 순위는 1시간 마다 데이터 삭제 배치 생성
-2. 경기 일정은 Live가 있기 때문에 1분으로 설정 
+2. 경기 일정은 Live가 있기 때문에 1분으로 설정
+
+<img width="551" alt="batch1" src="https://github.com/hwiseo-cho/Football/assets/57250330/a95dda1a-04ad-48a6-a297-5b62cca9635a">
+<br><br>
