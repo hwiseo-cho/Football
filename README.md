@@ -14,7 +14,6 @@
 - Spring Boot
 - Mysql
 - Bootstrap
-- AWS Ubuntu Server 20.04 LTS (HVM)
 - Football-data.org Free API 사용
 
 ## :computer: Function
